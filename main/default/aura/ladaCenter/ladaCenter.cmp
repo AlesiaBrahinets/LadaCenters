@@ -1,0 +1,17 @@
+<aura:component >
+    <div>
+	<c:mapCenter/>
+    
+    
+        <div class="slds-card">
+            <div class="slds-p-around_medium">
+                <c:getListService/>
+            </div>
+        </div>
+    <div class="slds-card">
+            <div class="slds-p-around_medium">
+                <c:createTestDrive/>
+            </div>
+        </div>
+    </div>
+</aura:component>

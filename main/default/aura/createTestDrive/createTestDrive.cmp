@@ -1,0 +1,52 @@
+<aura:component description="FormForSaveRecord" controller="CaseController">
+    
+    
+    <aura:attribute name="newCase" type="Case"
+         default="{ 'sobjectType': 'Case',
+                        'SuppliedName': '',
+                        'SuppliedEmail': '',
+                        'Subject': 'Test Drive'}"/>
+    <aura:attribute name="caseId" type="Id" />
+    
+    
+    <lightning:layout >
+        <lightning:layoutItem padding="around-small" size="6">
+    <div aria-labelledby="newcaseform">
+        
+        <fieldset class="slds-box slds-theme_default slds-container_small">
+        <legend id="newcaseform" class="slds-text-heading_small
+          slds-p-vertical_medium">
+          To order Test Drive
+        </legend>
+       
+        <form class="slds-form_stacked">
+            <lightning:input aura:id="namefield" label="FirstName and LastName "
+                             name="username"
+                             value="{!v.newCase.SuppliedName}"
+                             
+                             />
+            <lightning:input type="Email" aura:id="emailfield" label="Email"
+                             name="useremail"
+                             value="{!v.newCase.SuppliedEmail}"
+                             
+                             />
+            <lightning:input aura:id="subjectfield" label="What do you want?"
+                             name="subjectcase"
+                             value="{!v.newCase.Subject}"/>
+            <label class="slds-form-element__label">Case number after saving : </label>
+                        <lightning:formattedText title="Case Id" value="{!v.caseId}"/>
+                        <br/>
+            <lightning:button label="Create Test Drive"
+                              class="slds-m-top_medium"
+                              variant="brand"
+                              onclick="{!c.clickCreate}"/>
+        </form>
+       
+      </fieldset>
+      
+    </div>
+            </lightning:layoutItem>
+    </lightning:layout>
+    
+   
+</aura:component>

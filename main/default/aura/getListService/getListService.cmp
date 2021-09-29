@@ -1,0 +1,68 @@
+<aura:component description="TestListForm" controller="FormTestController">
+    <aura:attribute name="centers" type="List"/>
+
+    <div class="slds-card slds-p-top--medium">
+        <header class="slds-card__header">
+            <h3 class="slds-text-heading--small">Car Centers</h3>
+        </header>
+
+        <section class="slds-card__body">
+            <div id="list" class="row">
+
+
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+                        
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Center Name">Center Name</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="What center">What center</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="City">City</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Address">Address</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>    
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <aura:iteration items="{!v.centers}" var="acc">
+                    <tr class="slds-hint-parent">
+                        
+                        <td data-label="Center Name">
+                            <div class="slds-truncate" title="Center Name">{!acc.Name}</div>
+                        </td>
+                        <td data-label="What center">
+                            <div class="slds-truncate" title="What center">{!acc.What_center__c}</div>
+                        </td>
+                        <td data-label="City">
+                            <div class="slds-truncate" title="City">{!acc.City__c}</div>
+                        </td>
+                        <td data-label="Address">
+                            <div class="slds-truncate" title="Address">{!acc.Address__c}</div>
+                        </td>
+                        <td data-label="Address">
+                            <div class="slds-truncate" title="Phone">{!acc.Contact_Phone__c}</div>
+                        </td>
+                        <td data-label="Address">
+                            <div class="slds-truncate" title="Email">{!acc.Email__c}</div>
+                        </td>
+                    </tr>
+                    </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <lightning:button onclick="{!c.getCenters}" label="Update"/>
+</aura:component>
