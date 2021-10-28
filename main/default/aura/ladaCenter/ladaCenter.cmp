@@ -1,7 +1,7 @@
-<aura:component >
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global">
     <div>
-	<c:mapCenter/>
-    
+	<c:mapLadaCenter/>
+        <c:DisplayRelatedPictures/>
     
         <div class="slds-card">
             <div class="slds-p-around_medium">
@@ -12,6 +12,11 @@
             <div class="slds-p-around_medium">
                 <c:createTestDrive/>
             </div>
+        </div>
+        <div class="slds-card">
+            <div class="slds-p-around_medium">
+        <c:FormForAskQuestionLada/>
+                </div>
         </div>
     </div>
 </aura:component>

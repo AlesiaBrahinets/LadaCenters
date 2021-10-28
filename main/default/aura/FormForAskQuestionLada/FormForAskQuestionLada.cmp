@@ -1,11 +1,11 @@
-<aura:component description="FormForSaveRecord" controller="CaseController">
+<aura:component description="FormForAslQuestion" controller="CaseController">
     
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:attribute name="newCase" type="Case"
-         />
+    
+    <aura:attribute name="newCase" type="Case"/>
     <aura:attribute name="caseId" type="Id" />
-    
-    
+    <aura:attribute name="isFirst" type="boolean" default="true"/>
+    <aura:attribute name="isSecond" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <lightning:layout >
         <lightning:layoutItem padding="around-small" size="6">
     <div aria-labelledby="newcaseform">
@@ -13,10 +13,21 @@
         <fieldset class="slds-box slds-theme_default slds-container_small">
         <legend id="newcaseform" class="slds-text-heading_small
           slds-p-vertical_medium">
-          To order Test Drive 
+          To ask question
             
         </legend>
-       
+            <aura:if isTrue = "{!v.isFirst}">
+                <div class="c-container" >               
+                <lightning:button label="Ask Question" onclick="{!c.askQuestion}"/>
+                </div>
+               <div>
+                   <label class="slds-form-element__label">Number Case: </label>
+                <lightning:formattedText title="Case Id"  value="{!v.newCase.Id}"/>
+                  <br/> 
+                   <label class="slds-form-element__label">Question: </label>
+                        <lightning:formattedText title="Case Id" value="{!v.newCase.Subject}"/></div>
+            </aura:if>
+            <aura:if isTrue = "{!v.isSecond}">
         <form class="slds-form_stacked" name="nameForm">
             <lightning:input aura:id="caseform" label="FirstName and LastName "
                              name="username"
@@ -26,14 +37,16 @@
                              name="useremail"
                              value="{!v.newCase.SuppliedEmail}"
                              required="true"/>
-            <lightning:input aura:id="caseform" label="What do you want?"
+            <lightning:input aura:id="caseform" label="AskQuestion?"
                              name="subjectcase"
                              value="{!v.newCase.Subject}"
-                             required="true"/>
+                             required="true"
+                             placeholder="Enter your question, please!"/>            
             <label class="slds-form-element__label">Case number after saving : </label>
-                        <lightning:formattedText title="Case Id" value="{!v.caseId}"/>
+                        
                         <br/>
-            <lightning:button label="Create Test Drive"
+            
+            <lightning:button label="Enter"
                               class="slds-m-top_medium"
                               variant="brand"
                               onclick="{!c.clickCreate}"/>
@@ -41,7 +54,9 @@
                               class="slds-m-top_medium"
                               variant="brand"
                               onclick="{!c.doInit}"/>
-          </form>      
+            
+          </form>  
+                </aura:if>
         </fieldset>      
       </div>
     </lightning:layoutItem>

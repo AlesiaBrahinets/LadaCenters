@@ -9,8 +9,10 @@ public with sharing class CaseController {
       }
     
     @AuraEnabled
-    public static Case saveCase(Case newCase) {  
+    public static Case saveCase(Case newCase) { 
+        if(newCase.SuppliedName!='' && newCase.SuppliedEmail!=''&& newCase.Subject!='' ){
         upsert newCase;
+        }
         return newCase;
     }
 

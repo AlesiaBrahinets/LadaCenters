@@ -1,0 +1,14 @@
+<apex:page controller="DownloadPdfFileController" renderAs="pdf">
+ 
+  <apex:outputlabel > 
+     Enter Name 
+  </apex:outputlabel>
+ 
+    <apex:pageBlock title="PricebookEntries">
+   <apex:pageBlockTable value="{!PDFData}" var="contact">
+      <apex:column value="{!contact.UnitPrice}"/>
+      <apex:column value="{!contact.Product2Id}"/>
+       <apex:column value="{!contact.Product2.Complectation__c}"/>
+   </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:page>

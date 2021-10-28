@@ -1,10 +1,20 @@
 ({
+	askQuestion : function(component, event, helper) {
+		component.set("v.isFirst", false); 
+        component.set("v.isSecond",true );
+        component.set("v.newCase",{ 
+                        'sobjectType': 'Case',
+                        'SuppliedName': '',
+                        'SuppliedEmail': '',
+                        'Subject': ''}); 
+        
+	},
     doInit: function(component, event, helper) {       
         component.set("v.newCase",{ 
                         'sobjectType': 'Case',
                         'SuppliedName': '',
                         'SuppliedEmail': '',
-                        'Subject': 'Test Drive'}); 
+                        'Subject': ''}); 
     },
     clickCreate: function(component, event,helper) {
         let validExpense = component.find('caseform').reduce(function (validSoFar, inputCmp) { 
@@ -16,5 +26,4 @@
         helper.createCase(component, newCase);            
         }
     }
-      
 })

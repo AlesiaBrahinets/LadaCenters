@@ -1,0 +1,86 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global" description="FormForSaveRecord" controller="MapController"> 
+    <aura:attribute name="newLead" type="Lead"/>
+    <aura:attribute name="LeadId" type="Id" />
+     <aura:attribute name="newCase" type="Case"/>
+     <aura:attribute name="carId" type="Id"/>
+    <aura:attribute name="isFirst" type="boolean" default="true"/>
+    <aura:attribute name="isSecond" type="boolean" default="false"/>
+    <aura:attribute name="isThird" type="boolean" default="false"/>
+    <aura:attribute name="answer" type="String"/>
+    <lightning:layout >
+        <lightning:layoutItem padding="around-small" size="6">
+    <div aria-labelledby="newcaseform">
+        
+        <fieldset class="slds-box slds-theme_default slds-container_small">
+        <legend id="newcaseform" class="slds-text-heading_small
+          slds-p-vertical_medium">
+          To order
+            
+        </legend>
+            <aura:if isTrue = "{!v.isFirst}">
+                <div class="c-container" >               
+                <lightning:button label="To order" onclick="{!c.giveForm}"/>
+                </div>
+               <div>
+                   <label class="slds-form-element__label">You order </label>
+                <lightning:formattedText title="Your order "  value="{!v.answer}"/>
+                  <br/> 
+                   <label class="slds-form-element__label">Question: </label>
+                        <lightning:formattedText title="Case Id" value="{!v.newCase.Id}"/></div>                
+            </aura:if>
+           
+            <aura:if isTrue = "{!v.isSecond}">
+    <lightning:layout >
+        <lightning:layoutItem padding="around-small" size="6">
+    <div aria-labelledby="newleadform">
+        <form class="slds-form_stacked" name="nameForm">
+            <lightning:input aura:id="leadform" label="Name"
+                             name="username"
+                             value="{!v.newLead.Name}"
+                             required="true"/>
+            <lightning:input type="tel" aura:id="leadform" label="Phone"
+                             name="userephone"
+                             value="{!v.newLead.Phone}"
+                             placeholder="+375295034822"
+                             maxlength="13" minlength="13"
+                             required="true"/>
+            <lightning:input type="Email" aura:id="leadform" label="Email"
+                             name="useremail"
+                             value="{!v.newLead.Email}"
+                             required="true"/>            
+            <label class="slds-form-element__label">Lead number after saving : </label>
+                        <lightning:formattedText title="Lead Id" value="{!v.LeadId}"/>
+                        <br/>
+            <lightning:button label="Create order"
+                              class="slds-m-top_medium"
+                              variant="brand"
+                              onclick="{!c.clickCreate}"/>
+            <lightning:button label="Back"
+                              class="slds-m-top_medium"
+                              variant="brand"
+                              onclick="{!c.backClickOne}"/>
+          </form>
+        </div>
+          </lightning:layoutItem>
+  </lightning:layout> 
+                </aura:if>
+            <aura:if isTrue = "{!v.isThird}">
+                <div class="c-container" >               
+                <lightning:button label="Confirm your order" onclick="{!c.confirm}"/>
+                    <lightning:button label="Back"
+                              class="slds-m-top_medium"
+                              variant="brand"
+                              onclick="{!c.backClickTwo}"/>
+                </div>
+               <div>
+                   <label class="slds-form-element__label">Do you agree? </label>
+                <lightning:formattedText title="Case answer"  value="{!v.answer}"/>
+                  <br/> 
+                   <label class="slds-form-element__label">Question: </label>
+                        <lightning:formattedText title="Lead Id" value="{!v.newLead.Id}"/></div>                
+            </aura:if>
+        </fieldset>      
+      </div>
+      </lightning:layoutItem>
+  </lightning:layout>
+</aura:component>

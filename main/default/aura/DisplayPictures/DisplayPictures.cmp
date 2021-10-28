@@ -1,0 +1,36 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="MapController">
+ <!--Aura handler to handle doin it action -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <!-- Aura Attributes -->
+    <aura:attribute name="pictureList" type="List"/>
+   <aura:attribute name="contents" type="List" default="[]"/>
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="carName" type="String"/>
+    <!-- Below default value is the URL -->
+    <aura:attribute name="prefixURL" type="String" default="/sfc/servlet.shepherd/version/download/"/>
+    <!-- Below line will Iterate all contents list -->
+    <aura:iteration items="{!v.contents}" var="content">
+        <figure class="slds-image slds-image--card">
+<a href="javascript:void(0);" class="slds-image__crop  slds-image__crop--16-by-9">
+                <!--Below line will display the image by putting content id -->
+<img src="{!v.prefixURL + content.Id}" alt="Description of the image"/>
+            </a>
+            <!-- Below code is use to provide caption to the image -->
+            <figcaption class="slds-image__title slds-image__title--card">
+                <!--below line will display the Name from pictureList -->
+<span class="slds-image__text slds-truncate" title="Image Title">                       {!v.carName}
+             </span>
+                
+            </figcaption>
+        </figure> 
+        
+        
+        <lightning:recordViewForm recordId="{!v.pictureList.Id}" objectApiName="{!v.sObjectName}">
+                       <div class="slds-box">
+                          <lightning:outputField fieldName="Name" />
+                          <lightning:outputField fieldName="Complectation__c" />  
+                           <lightning:outputField fieldName="Body_type__c" /> 
+                       </div>
+                    </lightning:recordViewForm>  
+    </aura:iteration>
+</aura:component>

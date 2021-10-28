@@ -1,0 +1,95 @@
+<aura:component controller="MapController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="isFirst" type="boolean" default="true"/>
+    <aura:attribute name="isSecond" type="boolean" default="false"/>
+    <aura:attribute name="isThird" type="boolean" default="false"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="carList" type="List"/>
+    <aura:attribute name="modelList" type="List"/>
+    <aura:attribute name="selectedId" type="Id"/>
+    <aura:attribute name="product" type="Modification__c"/> 
+    <aura:attribute name="sObjectName" type="String"/>    
+    <aura:attribute name="sendData" type="object"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue = "{!v.isFirst}">
+        <div class="c-container" >
+            <lightning:layout multipleRows="true">
+                <aura:iteration items="{!v.carList}" var="clist">
+                  <lightning:layoutItem flexibility="auto" size="3" padding="around-small">
+                        <div>
+                            <ul class="slds-has-dividers_around-space">  
+                                <p align="justify">
+                                    <figure class="slds-image slds-image--card">
+                                    <h3 class="slds-tile__title slds-truncate" title="{!clist.Name}">
+                                    <a href="javascript:void(0);" label="{!clist.Name}">
+                                    <div onclick = "{!c.onPictureClick}" title = "{!clist.Name}" label="{!clist.Name}">
+                                       <c:DisplayPictures  pictureList="{!clist}" sObjectName="Product2" carName="{!clist.Name}"/>
+                                    </div>
+                                    <lightning:button label="Download Document" onclick="{!c.downloadDocument}"/>
+                                    
+                                            </a>
+                                        </h3>
+                                    </figure>
+                                </p>
+                            </ul>
+                        </div>
+                    </lightning:layoutItem>
+                </aura:iteration>
+            </lightning:layout>
+        </div>
+    </aura:if>
+    <aura:if isTrue = "{!v.isSecond}">
+<lightning:button variant="brand" label="Back" title="Back" onclick="{!c.backClick }" />
+        <div class="c-container" >
+            <lightning:layout multipleRows="true">
+                <aura:iteration items="{!v.modelList}" var="clist">
+          <lightning:layoutItem flexibility="auto" size="3" padding="around-small">
+                        <div class="" >
+                            <ul class="slds-has-dividers_around-space">  
+                                <p align="justify">
+                                    <figure class="slds-image slds-image--card">
+                                    <h3 class="slds-tile__title slds-truncate" title="{!clist.Name}">
+                             <a href="javascript:void(0);" label="{!clist.Name}">
+            <div title = "{!clist.Name}" label="{!clist.Name}">
+<lightning:button label="View" name="View" aura:id="ViewCar" onclick="{!c.openModal}" iconName="utility:View_form" value="{!clist}" /> 
+                <c:DoOrderForClient/>
+                <c:DisplayPictures  pictureList="{!clist}" sObjectName="Modification__c" carName="{!clist.ProductId__c.Name}"/>                    
+                                                </div>
+                                            </a>
+                                        </h3>
+                                    </figure>
+                                </p>
+                            </ul>
+                        </div>
+                    </lightning:layoutItem>
+                </aura:iteration>
+            </lightning:layout>
+        </div>
+        <div class="slds-m-around_xx-large">
+        <section aura:id="carModal" role="dialog" tabindex="-1" aria-labelledby="productModalHeading" aria-modal="true" aria-describedby="contactModalBody" class="slds-modal">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon class="slds-modal__close" alternativeText="Close" iconName="utility:close" onclick="{!c.closeModal}" variant="bare-inverse" size="large"></lightning:buttonIcon>
+                    <h2 id="productModalHeading" class="slds-text-heading_medium slds-hyphenate">Car</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="productModalBody">
+                    
+                    <lightning:recordViewForm recordId="{!v.product.Id}" objectApiName="sObjectName">
+                       <div class="slds-box">
+                          <lightning:outputField fieldName="Name" />
+                          <lightning:outputField fieldName="Engine__c" /> 
+                           <lightning:outputField fieldName="Color__c" />
+                           <lightning:outputField fieldName="Complectation__c" />
+                           <lightning:outputField fieldName="Specification__c" />                          
+                       </div>
+                    </lightning:recordViewForm>        
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button onclick="{!c.closeModal}" variant="neutral">Cancel</lightning:button>
+                    
+                </footer>
+            </div>
+        </section>
+        <div aura:id="carModalBackdrop" class="slds-backdrop"></div>
+    </div >
+    </aura:if>
+</aura:component>
